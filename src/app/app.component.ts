@@ -11,4 +11,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'todoapp';
+  descripcion = 'To do app made with Angular 17';
+  tasks = [
+    'Casa',
+    'Cocina',
+    'Baño'
+  ]
 }
