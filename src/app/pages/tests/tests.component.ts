@@ -15,4 +15,13 @@ export class TestsComponent {
     'Cocina',
     'Baño'
   ]
+  Name = 'Nicolas';
+  disabled = true;
+  imgRender = 'https://picsum.photos/200';
+
+  person = {
+    name: 'Nicolas',
+    age: 18,
+    img: 'https://picsum.photos/200/300.jpg'
+  }
 }
