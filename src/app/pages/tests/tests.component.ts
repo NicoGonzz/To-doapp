@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -15,7 +15,7 @@ export class TestsComponent {
     'Cocina',
     'Baño'
   ]
-  Name = 'Nicolas';
+  name = signal('Nicolas');
   disabled = true;
   imgRender = 'https://picsum.photos/200';
 
@@ -24,4 +24,26 @@ export class TestsComponent {
     age: 18,
     img: 'https://picsum.photos/200/300.jpg'
   }
+//LLamadas a los metodos
+inputValue: string = '';
+//Metodos
+  clickHandler(){
+  alert('Estas presionando el boton');
+  }
+
+  doubleClick(){
+    alert('Estas presionando el segundo boton');
+  }
+
+  changeInput(event: Event){
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.name.set(newValue);
+  }
+
+  keyDownHandler(event: KeyboardEvent){
+      const input = event.target as HTMLInputElement;
+      console.log(input.value);
+      this.inputValue = input.value;
+    }
 }
