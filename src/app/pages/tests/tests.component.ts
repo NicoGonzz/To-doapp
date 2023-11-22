@@ -10,11 +10,11 @@ import { CommonModule } from '@angular/common';
 })
 export class TestsComponent {
   descripcion = 'To do app made with Angular 17';
-  tasks = [
-    'Casa',
-    'Cocina',
-    'Baño'
-  ]
+  tasks = signal([
+    ' Casa',
+    ' Cocina',
+    ' Baño'
+  ]);
   name = signal('Nicolas');
   disabled = true;
   imgRender = 'https://picsum.photos/200';
