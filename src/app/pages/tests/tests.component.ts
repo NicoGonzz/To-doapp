@@ -19,11 +19,11 @@ export class TestsComponent {
   disabled = true;
   imgRender = 'https://picsum.photos/200';
 
-  person = {
-    name: 'Nicolas',
-    age: 18,
+  person = signal({
+    name: 'admin',
+    age: 19,
     img: 'https://picsum.photos/200/300.jpg'
-  }
+  });
 //LLamadas a los metodos
 inputValue: string = '';
 //Metodos
@@ -39,6 +39,17 @@ inputValue: string = '';
     const input = event.target as HTMLInputElement;
     const newValue = input.value;
     this.name.set(newValue);
+  }
+
+  changeAge(event:Event){
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.person.update(estadoAnterior =>{
+      return{
+        ...estadoAnterior,
+        age: parseInt(newValue,10)
+      }
+    })
   }
 
   keyDownHandler(event: KeyboardEvent){

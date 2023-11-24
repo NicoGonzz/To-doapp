@@ -13,23 +13,23 @@
 <img [src]="imgRender" alt="">
 <input type="text" [value]="name()">
 <button disabled="true">Click on</button>
-<p>person: {{person.name}}</p>
-<p>person: {{person.age}}</p>
+<p>person: {{person().name}}</p>
+<p>person: {{person().age}}</p>
 <img src="person.img" alt="">
 <hr/>
 <p>Manejo de Eventos</p>
 <button class="boton_prueba" (click)="clickHandler()">Click me</button>
 <button class="boton_prueba1" (dblclick)="doubleClick()">Click me</button>
 <p>(change)</p>
-<input type="number" [value]="person.age" (change)="changeInput($event)">
+<input type="number" [value]="person().age" (change)="changeInput($event)">
 <p>Manejo de Eventos Keyboard</p>
 <p>(keydown)</p>
-<input type="text" [value]="person.name" (keydown)="keyDownHandler($event)">
+<input type="text" [value]="person().name" (keydown)="keyDownHandler($event)">
 <p>Valor del input: {{ inputValue }}</p>
-<input type="text" [value]="person.name" (keydown.enter)="clickHandler()">
+<input type="text" [value]="person().name" (keydown.enter)="clickHandler()">
 <hr/>
 <p>Signals</p>
-<input type="text" [value]="person.name" (change)="changeInput($event)">
+<input type="text" [value]="person().name" (change)="changeInput($event)">
 <p>Name: {{name()}}</p>
 <ul>
   <p>total de tareas: {{tasks().length}}</p>
@@ -39,5 +39,17 @@
 </ul>
 </div>
 <hr/>
-<p>Directivas de Control</p>
-
+<p>Ng If</p>
+<div *ngIf="1 === 1">
+  Condicion correcta
+</div>
+<div *ngIf="name() === 'admin' ">
+  Bienvenido usuario Administrador, nos alegra verlo.
+</div>
+<input type="number" [value]="person().age" (change)="changeAge($event)">
+<div *ngIf="person().name === 'admin' &&  person().age > 18; else bloqueElse">
+  Bienvenido usuario Administrador, nos alegra verlo y es mayor a 18 años.
+</div>
+<ng-template #bloqueElse>
+    El usuario no es administrador y es menor de 18 años.
+</ng-template>
