@@ -51,7 +51,16 @@ inputValue: string = '';
       }
     })
   }
-
+  changeName(event:Event){
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.person.update(estadoAnterior =>{
+      return{
+        ...estadoAnterior,
+        name: newValue,
+      }
+    })
+  }
   keyDownHandler(event: KeyboardEvent){
       const input = event.target as HTMLInputElement;
       console.log(input.value);

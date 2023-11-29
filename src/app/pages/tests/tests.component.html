@@ -53,3 +53,11 @@
 <ng-template #bloqueElse>
     El usuario no es administrador y es menor de 18 años.
 </ng-template>
+<hr/>
+<input type="text" [value]="person().name" (change)="changeName($event)">
+<div [ngSwitch]="person().name">
+    <p *ngSwitchCase="'admin'">El persona es el Admin</p>
+    <p *ngSwitchCase="'usuario'">La persona es un usuario</p>
+    <p *ngSwitchCase="'empresa'">La persona es una empresa</p>
+    <p *ngSwitchDefault>La persona no es una empresa,tampoco un Admin ni un usuario</p>
+</div>
