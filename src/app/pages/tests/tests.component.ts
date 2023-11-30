@@ -1,10 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tests',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './tests.component.html',
   styleUrl: './tests.component.scss'
 })
@@ -24,6 +25,15 @@ export class TestsComponent {
     age: 19,
     img: 'https://picsum.photos/200/300.jpg'
   });
+
+  colorControl = new FormControl();
+
+  constructor(){
+    this.colorControl.valueChanges.subscribe(value => {
+      console.log(value);
+    })
+  }
+
 //LLamadas a los metodos
 inputValue: string = '';
 //Metodos

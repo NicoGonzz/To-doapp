@@ -1,11 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+
 import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -43,10 +45,20 @@ export class HomeComponent {
     },
   ]);
 
-  changeInput(event: Event){
-    const input = event.target as HTMLInputElement;
-    const newTask = input.value;
-    this.addTask(newTask);
+    newTaskControl = new FormControl('',{
+      nonNullable: true,
+      validators:
+        Validators.required,
+    })
+
+  changeInput(){
+    if(this.newTaskControl.valid){
+      const value = this.newTaskControl.value.trim();
+      if(value != ''){
+        this.addTask(value);
+        this.newTaskControl.setValue('');
+      }
+    }
    // this.tasks.update((tasks) => [...tasks,newTask]); //agregamos un nuevo elemento al final del array creando un nuevo estado
   }
 

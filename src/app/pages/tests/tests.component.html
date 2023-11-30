@@ -60,4 +60,9 @@
     <p *ngSwitchCase="'usuario'">La persona es un usuario</p>
     <p *ngSwitchCase="'empresa'">La persona es una empresa</p>
     <p *ngSwitchDefault>La persona no es una empresa,tampoco un Admin ni un usuario</p>
+    <input type="color" [formControl]="colorControl">
+      <p>color: {{ colorControl.value }}</p>
+    <hr/>
 </div>
+
+
