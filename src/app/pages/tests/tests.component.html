@@ -62,7 +62,14 @@
     <p *ngSwitchDefault>La persona no es una empresa,tampoco un Admin ni un usuario</p>
     <input type="color" [formControl]="colorControl">
       <p>color: {{ colorControl.value }}</p>
+      <svg>
+        <g>
+          <rect x="0" y="0" height="100" width="100" [attr.fill]="colorControl.value"/>
+        </g>
+      </svg>
     <hr/>
+    <input type="number" [formControl]="widthControl">
+    <span class="box" [style.width.px]="widthControl.value" ></span>
 </div>
 
 
