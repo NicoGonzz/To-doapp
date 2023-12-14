@@ -82,11 +82,52 @@ export class HomeComponent {
         }
         return task;
       })
-    })
+    });
+    /*this.tasks.mutate(state =>{
+      const currentTask = state[index];
+      state[index] ={
+        ...currentTask,
+        completed: !currentTask.completed
+      }
+    })*/
   }
 
   deleteTask(index: number){ //Tomamos la posicion de la tarea para eliminarla
     this.tasks.update((tasks) => tasks.filter
     ((task, position) => position !== index)); //recibimos el estado de las tasks primeramente
+  }
+
+  updateTaskEditingMode(index: number){
+    this.tasks.update((tasks) => {
+      return tasks.map((task,position)=> {
+        if (position ===index){
+          return {
+            ...task,
+            editing: true
+          }
+        }
+        return{
+          ...task,
+          editing: false
+        };
+      })
+    });
+  }
+
+  updateTaskEditedText(index: number, event: Event){
+    const input = event.target as HTMLInputElement;
+    this.tasks.update((tasks) => {
+      return tasks.map((task,position)=> {
+        if (position ===index){
+          return {
+            ...task,
+            title: input.value,
+            editing: false
+          }
+        }
+        return task;
+      })
+    });
+
   }
 }

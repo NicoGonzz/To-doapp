@@ -70,6 +70,14 @@
     <hr/>
     <input type="number" [formControl]="widthControl">
     <span class="box" [style.width.px]="widthControl.value" ></span>
+    <hr/>
+    <p>
+      <input type="text" [formControl]="nameControl"> <br />
+      <span class="message-error" [class.active]="nameControl.invalid && nameControl.touched">Nombre Invalido</span>
+    </p>
+    <p>
+      <input type="text">
+    </p>
 </div>
 
 
