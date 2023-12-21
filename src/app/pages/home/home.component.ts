@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, Injector, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -13,43 +13,44 @@ import { Task } from '../../models/task.model';
 })
 export class HomeComponent {
   tasks = signal<Task[]>([
-    {
-      id: Date.now(),
-      title: 'Arreglar la casa',
-      completed: false
-    },
-    {
-      id: Date.now(),
-      title: 'Arreglar la Cocina',
-      completed: false
-    },
-    {
-      id: Date.now(),
-      title: 'Arreglar el baño',
-      completed: false
-    },
-    {
-      id: Date.now(),
-      title: 'Arreglar el dormitorio',
-      completed: false
-    },
-    {
-      id: Date.now(),
-      title: 'Arreglar la oficina',
-      completed: false
-    },
-    {
-      id: Date.now(),
-      title: 'Arreglar el jardin',
-      completed: false
-    },
   ]);
+
+  filter = signal<'all' | 'pending' | 'completed'>('all');
+  tasksByfilter = computed(()=>{
+    const filter = this.filter();
+    const tasks = this.tasks();
+    if(filter === 'pending'){
+      return tasks.filter(task => !task.completed)
+    }
+    if(filter === 'completed'){
+      return tasks.filter(task => task.completed)
+    }
+    return tasks;
+  })
 
     newTaskControl = new FormControl('',{
       nonNullable: true,
       validators:
         Validators.required,
-    })
+    });
+
+    injector = inject(Injector);
+
+    ngOnInit(){
+        const storage = localStorage.getItem('tasks');
+        if(storage){
+          const tasks = JSON.parse(storage);
+          this.tasks.set(tasks);
+        }
+        this.trackTasks();
+    }
+
+    trackTasks(){
+      effect(()=>{
+        const tasks  = this.tasks();
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+      },{injector: this.injector})
+    }
 
   changeInput(){
     if(this.newTaskControl.valid){
@@ -128,6 +129,9 @@ export class HomeComponent {
         return task;
       })
     });
+  }
 
+  changeFilter(filter:'all' | 'pending' | 'completed'){
+    this.filter.set(filter);
   }
 }
