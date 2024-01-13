@@ -81,7 +81,21 @@
 </div>
 <div>
   <input type="text">
-
 </div>
+<hr/>
+New Sintaxis
+@if (name() === 'pepe') {
+    <div>
+      Soy Nicolas
+    </div>
+}
+<h2>If else</h2>
+  @if (name() === 'pepe' && person().age >18 ){
+    <div>
+      Soy Nicolas y soy mayor de edad
+    </div>
+  } @else {
+    <div> Soy Nicolas y soy menor de 18</div>
+  }
 
-
+<hr/>
